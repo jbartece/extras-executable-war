@@ -82,6 +82,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
+        System.out.println("\nExecutable-war: main\n");
+        
         try {
             String v = System.getProperty("java.class.version");
             if (v!=null) {
@@ -187,18 +189,18 @@ public class Main {
         }
 
         // put winstone jar in a file system so that we can load jars from there
-        File tmpJar = extractFromJar("winstone.jar","winstone",".jar", extractedFilesFolder);
+        File tmpJar = extractFromJar("undertow4jenkins.jar","undertow4jenkins",".jar", extractedFilesFolder);
 
         // clean up any previously extracted copy, since
         // winstone doesn't do so and that causes problems when newer version of Jenkins
         // is deployed.
         File tempFile = File.createTempFile("dummy", "dummy");
-        deleteContents(new File(tempFile.getParent(), "winstone/" + me.getName()));
+        deleteContents(new File(tempFile.getParent(), "undertow4jenkins/" + me.getName()));
         tempFile.delete();
 
         // locate the Winstone launcher
         ClassLoader cl = new URLClassLoader(new URL[]{tmpJar.toURI().toURL()});
-        Class launcher = cl.loadClass("winstone.Launcher");
+        Class launcher = cl.loadClass("undertow4jenkins.Launcher");
         Method mainMethod = launcher.getMethod("main", new Class[]{String[].class});
 
         // override the usage screen

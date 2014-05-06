@@ -188,9 +188,8 @@ public class Main {
             return;
         }
 
-        // put winstone jar in a file system so that we can load jars from there
+        // put undertow4jenkins jar in a file system so that we can load jars from there
         File tmpJar = extractFromJar("undertow4jenkins.jar","undertow4jenkins",".jar", extractedFilesFolder);
-
         // clean up any previously extracted copy, since
         // winstone doesn't do so and that causes problems when newer version of Jenkins
         // is deployed.
@@ -198,7 +197,7 @@ public class Main {
         deleteContents(new File(tempFile.getParent(), "undertow4jenkins/" + me.getName()));
         tempFile.delete();
 
-        // locate the Winstone launcher
+        // locate the undertow4jenkins launcher
         ClassLoader cl = new URLClassLoader(new URL[]{tmpJar.toURI().toURL()});
         Class launcher = cl.loadClass("undertow4jenkins.Launcher");
         Method mainMethod = launcher.getMethod("main", new Class[]{String[].class});

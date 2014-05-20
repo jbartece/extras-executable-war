@@ -82,8 +82,6 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println("\nExecutable-war: main\n");
-        
         try {
             String v = System.getProperty("java.class.version");
             if (v!=null) {
